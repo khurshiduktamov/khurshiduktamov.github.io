@@ -1,28 +1,21 @@
 name: Deploy to GitHub Pages
-
 on:
   push:
     branches:
-      - main # change to your default branch
-  workflow_dispatch:
-
+      - main # replace with your branch name
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
 
       - name: Build Jekyll site
-        uses: helaili/jekyll-action@v2.3.0 # replace with latest version
+        uses: helaili/jekyll-action@v2.4.0
         with:
-          profile: github_pages
+          jekyll-version: '4.3.2'
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4.3.4 # replace with latest version
+        uses: peaceiris/actions-gh-pages@v4.5.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site # change to your Jekyll build directory
-          cname: khurshid.live # optional, remove if not needed
-          commit_message: Deploy site # customize commit message
-          allow_empty_commit: true # set to false if you don't want to deploy an empty commit
+          publish_dir: ./_site

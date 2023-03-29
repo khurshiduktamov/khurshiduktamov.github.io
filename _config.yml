@@ -79,3 +79,22 @@ defaults:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+# config.yml
+
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "posts"
+    label: "Posts"
+    folder: "_posts"
+    create: true
+    slug: "{{day}}-{{month}}-{{year}}-{{slug}}"
+    fields:
+      - {name: "title", label: "Title"}
+      - {name: "date", label: "Date", widget: "datetime"}
+      - {name: "body", label: "Body", widget: "markdown"}

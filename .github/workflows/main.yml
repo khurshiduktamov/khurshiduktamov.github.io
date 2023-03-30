@@ -10,12 +10,12 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build Jekyll site
-        uses: uses: helaili/jekyll-action@v2.6.3
+        uses: helaili/jekyll-action@v2.6.3
         with:
           jekyll-version: '4.3.2'
 
       - name: Deploy to GitHub Pages
-        uses: uses: peaceiris/actions-gh-pages@v4.6.2
+        uses: peaceiris/actions-gh-pages@v4.6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site

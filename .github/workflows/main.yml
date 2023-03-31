@@ -1,33 +1,33 @@
-name: Deploy Jekyll to GitHub Pages
+name: Build and Deploy to Github Pages
 
 on:
   push:
     branches:
-      - main  # or any other branch
+      - main # replace with the name of your source code branch
 
 jobs:
-  deploy:
+  build_and_deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v2
+      
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.x
-
-      - name: Install Jekyll and bundler
+          ruby-version: '3.2.0'
+          
+      - name: Install dependencies
         run: |
-          gem install jekyll bundler
+          gem install bundler
           bundle install
-
-      - name: Build Jekyll site
-        run: bundle exec jekyll build
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+          
+      - name: Build and deploy
+        run: |
+          JEKYLL_ENV=production bundle exec jekyll build
+          git config --global user.name ${{ github.actor }}
+          git config --global user.email ${{ github.actor }}@users.noreply.github.com
+          cd _site && git init
+          git remote add origin https://github.com/khurshiduktamov/khurshiduktamov.github.io.git # replace <username> with your GitHub username
+          git add .
+          git commit -m "Deployed via GitHub Actions"
+          git push -f origin master:gh-pages

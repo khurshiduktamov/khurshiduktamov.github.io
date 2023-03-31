@@ -22,10 +22,14 @@ jobs:
           bundle install
           
       - name: Build and deploy
+        env:
+          JEKYLL_ENV: production
         run: |
-          JEKYLL_ENV=production bundle exec jekyll build
-          git config --global user.name ${{ github.actor }}
-          git config --global user.email ${{ github.actor }}@users.noreply.github.com
+          gem install bundler
+          bundle install
+          bundle exec jekyll build
+          git config --global user.name khurshiduktamov
+          git config --global user.email khurshiduktamov@users.noreply.github.com
           cd _site && git init
           git remote add origin https://github.com/khurshiduktamov/khurshiduktamov.github.io.git # replace <username> with your GitHub username
           git add .

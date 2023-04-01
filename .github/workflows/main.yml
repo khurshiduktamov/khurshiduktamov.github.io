@@ -21,14 +21,12 @@ jobs:
           gem install bundler
           bundle install
           
-      - name: Add bundle bin directory to PATH
-        run: echo "::add-path::$GEM_HOME/bin"
           
       - name: Build and deploy
         env:
           JEKYLL_ENV: production
         run: |
-          bundle exec jekyll build
+          /usr/local/bin/jekyll build
           git config --global user.name khurshiduktamov
           git config --global user.email khurshiduktamov@users.noreply.github.com
           cd _site && git init

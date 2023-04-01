@@ -26,7 +26,7 @@ jobs:
         env:
           JEKYLL_ENV: production
         run: |
-          /usr/local/bin/jekyll build
+          /vendor/bundle/ruby/3.2.0/bin/jekyll build
           git config --global user.name khurshiduktamov
           git config --global user.email khurshiduktamov@users.noreply.github.com
           cd _site && git init
